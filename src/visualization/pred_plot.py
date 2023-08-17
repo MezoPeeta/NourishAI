@@ -4,7 +4,8 @@ from typing import List
 import matplotlib.pyplot as plt
 import torch
 import torchvision
-import yaml
+
+from src.models.model_transforms import read_params
 
 
 def predict_and_plot_image(
@@ -86,17 +87,11 @@ def predict_and_plot_image(
     plt.axis(False)
 
 
-def read_config():
-    with open("config/config.yml") as file:
-        config = yaml.safe_load(file)["params"]
-        return config
-
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Predict and plot image')
-    parser.add_argument('--model', type=str, help='model path', default=read_config()['model_path'])
+    parser.add_argument('--model', type=str, help='model path', default=read_params()['model_path'])
     parser.add_argument('--image', type=str, help='image path')
-    parser.add_argument('--class_names', type=str, help='class names', default=read_config()['class_names'])
+    parser.add_argument('--class_names', type=str, help='class names', default=read_params()['class_names'])
     parser.add_argument('--true_label', type=str, help='true label')
     parser.add_argument('--device', type=str, help='device', default="cpu")
 

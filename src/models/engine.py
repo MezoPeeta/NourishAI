@@ -4,7 +4,9 @@ import time
 from typing import Dict, List, Tuple
 
 import torch
+import wandb
 import yaml
+from torch.utils import data
 from torchvision import datasets
 from tqdm.auto import tqdm
 
@@ -13,7 +15,7 @@ from model_transforms import create_effnetb2_model
 
 def train_step(epoch: int,
                model: torch.nn.Module,
-               dataloader: torch.utils.data.DataLoader,
+               dataloader: data.DataLoader,
                loss_fn: torch.nn.Module,
                optimizer: torch.optim.Optimizer,
                device: torch.device = "cpu",
@@ -93,7 +95,7 @@ def train_step(epoch: int,
 
 def test_step(epoch: int,
               model: torch.nn.Module,
-              dataloader: torch.utils.data.DataLoader,
+              dataloader: data.DataLoader,
               loss_fn: torch.nn.Module,
               device: torch.device = "cpu",
               disable_progress_bar: bool = False) -> Tuple[float, float]:
@@ -161,8 +163,8 @@ def test_step(epoch: int,
 
 
 def train(model: torch.nn.Module,
-          train_dataloader: torch.utils.data.DataLoader,
-          test_dataloader: torch.utils.data.DataLoader,
+          train_dataloader: data.DataLoader,
+          test_dataloader: data.DataLoader,
           optimizer: torch.optim.Optimizer,
           loss_fn: torch.nn.Module,
           epochs: int,
@@ -244,7 +246,6 @@ def train(model: torch.nn.Module,
             model_path
         )
 
-        # Print out what's happening
         print(
             f"Epoch: {epoch + 1} | "
             f"train_loss: {train_loss:.4f} | "
@@ -255,7 +256,6 @@ def train(model: torch.nn.Module,
             f"test_epoch_time: {test_epoch_time:.4f}"
         )
 
-        # Update results dictionary
         results["train_loss"].append(train_loss)
         results["train_acc"].append(train_acc)
         results["test_loss"].append(test_loss)
@@ -263,16 +263,11 @@ def train(model: torch.nn.Module,
         results["train_epoch_time"].append(train_epoch_time)
         results["test_epoch_time"].append(test_epoch_time)
 
-    # Return the filled results at the end of the epochs
     return results
 
 
 def read_params() -> dict:
     """Reads in a YAML configuration file.
-
-    Args:
-        config_path (str): path to YAML configuration file.
-
     Returns:
         dict: dictionary of YAML configuration file.
     """
@@ -283,17 +278,21 @@ def read_params() -> dict:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Train a new model')
-    parser.add_argument('--model', type=str, help='model path', default='models/modelV3.pth')
+    parser.add_argument('--model', type=str, help='model path', default=read_params()['model_path'])
     parser.add_argument('--epochs', type=int, help='number of epochs', default=10)
     parser.add_argument('--batch_size', type=int, help='batch size', default=32)
     parser.add_argument('--lr', type=float, help='learning rate', default=0.001)
-    parser.add_argument('--device', type=str, help="model's device", default='cpu')
     parser.add_argument('--model_path', type=str, help="model's path", default='models')
     parser.add_argument('--progress_bar', type=bool, help="disable training progress bar", default=False)
 
     args = parser.parse_args()
 
     model, transforms = create_effnetb2_model()
+
+    wandb.login()
+
+    wandb.init(project="image_classification",config=read_params())
+    wandb.watch(model)
 
     train_dataset = datasets.ImageFolder(
         root=read_params()["train_data_path"],
@@ -306,23 +305,21 @@ if __name__ == "__main__":
         transform=transforms,
     )
 
-    train_dataloader = torch.utils.data.DataLoader(
+    train_dataloader = data.DataLoader(
         train_dataset,
         batch_size=args.batch_size,
         shuffle=True,
         num_workers=os.cpu_count(),
-        device=args.device
     )
 
-    test_dataloader = torch.utils.data.DataLoader(
+    test_dataloader = data.DataLoader(
         test_dataset,
         batch_size=args.batch_size,
         shuffle=False,
         num_workers=os.cpu_count(),
-        device=args.device
-    )
+            )
 
-    train(
+    results = train(
         model=model,
         train_dataloader=train_dataloader,
         test_dataloader=test_dataloader,
@@ -333,3 +330,6 @@ if __name__ == "__main__":
         disable_progress_bar=args.progress_bar,
         model_path=args.model
     )
+
+    wandb.log(results)
+

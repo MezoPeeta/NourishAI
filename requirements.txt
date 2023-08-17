@@ -3,7 +3,7 @@
 
 # external requirements
 click
-Sphinx
+Sphinx~=5.0.2
 coverage
 awscli
 flake8
@@ -16,4 +16,6 @@ torchvision~=0.15.2
 matplotlib~=3.7.1
 setuptools~=65.6.3
 wandb
-```
+tox
+pillow~=9.4.0
+dvc

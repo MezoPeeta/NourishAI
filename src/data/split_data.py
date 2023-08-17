@@ -16,17 +16,14 @@ def split_dataset(dataset: datasets, split_size: float = 0.2, device: torch.devi
         tuple: (random_split_1, random_split_2) where random_split_1 is of size split_size*len(dataset) and 
             random_split_2 is of size (1-split_size)*len(dataset).
     """
-    # Create split lengths based on original dataset length
-    length_1 = int(len(dataset) * split_size)  # desired length
-    length_2 = len(dataset) - length_1  # remaining length
+    length_1 = int(len(dataset) * split_size)
+    length_2 = len(dataset) - length_1
 
-    # Print out info
     print(
         f"[INFO] Splitting dataset of length {len(dataset)} "
         f"into splits of size: {length_1} ({int(split_size * 100)}%), "
         f"{length_2} ({int((1 - split_size) * 100)}%)")
 
-    # Create splits with given random seed
     random_split_1, random_split_2 = data.random_split(dataset,
                                                        lengths=[length_1, length_2],
                                                        generator=torch.Generator(device=device)

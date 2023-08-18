@@ -11,6 +11,9 @@ Right now, MLOPs is at level 0. The model is trained on
 - PyTorch (for model training) & Torchvision (for data loading)
 - DVC (Data Version Control) for data versioning
 - WandB (Weights and Biases) for experiment tracking
+- Tox (for testing on multiple python versions)
+- Pillow (for image processing)
+- Pytest (for testing) soon
 - Streamlit (for deployment) soon
 - Docker (for containerization) soon
 - CI/CD (for continuous integration and deployment using GitHub Actions) soon

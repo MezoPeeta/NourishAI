@@ -13,6 +13,7 @@ Right now, MLOPs is at level 0. The model is trained on
 - WandB (Weights and Biases) for experiment tracking
 - Streamlit (for deployment) soon
 - Docker (for containerization) soon
+- CI/CD (for continuous integration and deployment using GitHub Actions) soon
 
 
 The dataset used is Food-101 dataset. It is a dataset of 101 food categories, with 101,000 images. For more information, visit [here](https://www.kaggle.com/dansbecker/food-101).

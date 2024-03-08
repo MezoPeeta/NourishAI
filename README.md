@@ -22,10 +22,16 @@ docker run -d --name test -p 80:80 pascaldev/nourish
 #### You can simply send a POST request to http://127.0.0.1/predict with the body
 
 ```json
-{"file":"LOCAL_IMAGE_FILE_PATH"}
+{
+    "file": "LOCAL_IMAGE_FILE_PATH"
+}
 ```
-
-
+#### Expected result:
+```json
+{
+    "label": "PREDICTED_LABEL"
+}
+```
 
 ## Packages Used
 - PyTorch (for model training) & Torchvision (for data loading)

@@ -63,7 +63,7 @@ jupyter==1.0.0
 jupyterlab-pygments==0.1.2
 jupyterlab-server==2.16.5
 jupyterlab-widgets==3.0.5
-jupyterlab==3.5.3
+jupyterlab==3.6.7
 kiwisolver==1.4.4
 markdown-it-py==2.2.0
 markupsafe==2.1.1

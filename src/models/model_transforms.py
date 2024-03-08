@@ -1,10 +1,7 @@
-import os
-
+import torch
 import torchvision
 import yaml
 from torch import nn
-import argparse
-from typing import Tuple
 
 
 def read_params() -> dict:
@@ -18,7 +15,7 @@ def read_params() -> dict:
     return config
 
 
-def create_effnetb2_model(num_classes: int = 102):
+def load_model(num_classes: int = 102):
     """Creates an EfficientNetB2 feature extractor model and transforms.
 
     Args:
@@ -43,9 +40,8 @@ def create_effnetb2_model(num_classes: int = 102):
         nn.Dropout(p=0.3, inplace=True),
         nn.Linear(in_features=1408, out_features=num_classes),
     )
+    model_path = read_params()["model_path"]
+
+    model.load_state_dict(torch.load(model_path, map_location="cpu")["model_state_dict"])
 
     return model, transforms
-
-
-
-

@@ -1,0 +1,52 @@
+{
+    "os": "Windows-10-10.0.19045-SP0",
+    "python": "3.10.10",
+    "heartbeatAt": "2023-08-17T17:14:02.956063",
+    "startedAt": "2023-08-17T17:14:01.448198",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "--image_path=../../data/fox.jpg"
+    ],
+    "state": "running",
+    "program": "E:\\Projects\\Livine\\model\\end_to_end\\nourish\\src\\models\\predict_model.py",
+    "codePath": "src\\models\\predict_model.py",
+    "git": {
+        "remote": "https://github.com/MezoPeeta/NourishAI.git",
+        "commit": "e0f9b1de3cf9b9e90f26d1c894608fc0e648e9d8"
+    },
+    "email": "wildlifemain1@gmail.com",
+    "root": "E:/Projects/Livine/model/end_to_end/nourish",
+    "host": "DESKTOP-4L6S99I",
+    "username": "Mazen",
+    "executable": "E:\\Programs\\MiniConda\\New folder\\python.exe",
+    "cpu_count": 4,
+    "cpu_count_logical": 4,
+    "cpu_freq": {
+        "current": 3301.0,
+        "min": 0.0,
+        "max": 3301.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 3301.0,
+            "min": 0.0,
+            "max": 3301.0
+        }
+    ],
+    "disk": {
+        "total": 461.35253524780273,
+        "used": 311.6108283996582
+    },
+    "gpu": "GeForce GT 730",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "GeForce GT 730",
+            "memory_total": 4294967296
+        }
+    ],
+    "memory": {
+        "total": 7.983814239501953
+    }
+}

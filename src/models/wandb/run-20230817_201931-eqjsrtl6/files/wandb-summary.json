@@ -1,0 +1,1 @@
+{"image": {"_type": "image-file", "sha256": "b22371c9d221566f3f44513a4b71db8e5af697aa6b27ba36e96cdbb363bc20e6", "size": 1488146, "path": "media/images/image_0_b22371c9d221566f3f44.png", "format": "png", "width": 1024, "height": 1024, "caption": "not_food"}, "_timestamp": 1692292788.157221, "_runtime": 16.369781970977783, "_step": 0, "_wandb": {"runtime": 15}}

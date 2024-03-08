@@ -5,6 +5,6 @@ setup(
     packages=find_packages(),
     version='0.1.0',
     description='A food classifier app with MLOPs',
-    author='Mazen',
+    author='Mazen Omar',
     license='MIT',
 )

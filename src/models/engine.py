@@ -10,7 +10,7 @@ from torch.utils import data
 from torchvision import datasets
 from tqdm.auto import tqdm
 
-from model_transforms import create_effnetb2_model
+from model_transforms import load_model
 
 
 def train_step(epoch: int,
@@ -287,7 +287,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    model, transforms = create_effnetb2_model()
+    model, transforms = load_model()
 
     wandb.login()
 

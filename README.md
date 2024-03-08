@@ -7,16 +7,38 @@ The project structure is inspired by [cookiecutter-data-science](https://drivend
 Right now, MLOPs is at level 0. The model is trained on
 ![MLOPSLevel0](MLOPS0.jpeg)
 
+### You can install the model using downloading the image using
+```docker
+docker pull pascaldev/nourish:latest
+```
+#### and run it by
+```docker
+docker run -d --name test -p 80:80 pascaldev/nourish
+```
+#### then access to http://127.0.0.1/docs and click on predict and try it on
+
+### OR
+
+#### You can simply send a POST request to http://127.0.0.1/predict with the body
+
+```json
+{"file":"IMAGE_FILE_PATH"}
+```
+
+
+
 ## Packages Used
 - PyTorch (for model training) & Torchvision (for data loading)
 - DVC (Data Version Control) for data versioning
 - WandB (Weights and Biases) for experiment tracking
 - Tox (for testing on multiple python versions)
+- Docker (for containerization) 
 - Pillow (for image processing)
-- Pytest (for testing) soon
-- Streamlit (for deployment) soon
-- Docker (for containerization) soon
-- CI/CD (for continuous integration and deployment using GitHub Actions) soon
+
+## Upcoming
+- [ ] Add CI/CD
+- [ ] Add Streamlit
+- [ ] Add Pytest
 
 
 The dataset used is Food-101 dataset. It is a dataset of 101 food categories, with 101,000 images. For more information, visit [here](https://www.kaggle.com/dansbecker/food-101).

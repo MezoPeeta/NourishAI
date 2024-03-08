@@ -1,0 +1,14 @@
+data/
+reports/
+notebooks/
+references/
+docs/
+venv/
+**/*.pyc
+**/*.pyo
+**/*.mo
+.gitignore
+.git/
+**/__pycache__/
+Dockerfile
+**/*.md

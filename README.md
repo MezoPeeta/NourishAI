@@ -7,6 +7,8 @@ The project structure is inspired by [cookiecutter-data-science](https://drivend
 Right now, MLOPs is at level 0. The model is trained on
 ![MLOPSLevel0](MLOPS0.jpeg)
 
+It's also hosted on [gradio space](https://huggingface.co/spaces/mazenAI/livine-demo)
+
 ### You can install the model using downloading the image using
 ```docker
 docker pull pascaldev/nourish:latest
